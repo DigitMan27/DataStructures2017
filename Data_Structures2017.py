@@ -69,7 +69,9 @@ def Load():
 
 def Add():
     try:
+           global F
            F = list(d)
+           del F[:]
            global counter
            global i_d
            global name
@@ -82,8 +84,13 @@ def Add():
            customer_name = input("customer_name:")
            checkInDate = input("CheckInDate:")
            DaysToStay = input("DaysToStay:")
-           F.extend([name,stars,Nor])
-           F.extend([customer_name,checkInDate,DaysToStay])
+           F.append(i_d)
+           F.append(name)
+           F.append(stars)
+           F.append(Nor)
+           F.append(customer_name)
+           F.append(checkInDate)
+           F.append(DaysToStay)
            print(F)
            #d.update({id:name,id:stars,id:Nor,id:customer_name,id:checkInDate,id:DaysToStay})
            counter = len(d.keys())
@@ -93,7 +100,9 @@ def Add():
                     break
               checkInDate = input("CheckInDate:")
               DaysToStay = input("DaysToStay:")
-              F.extend([customer_name,checkInDate,DaysToStay])
+              F.append(customer_name)
+              F.append(checkInDate)
+              F.append(DaysToStay)
            d.update({i_d:name,i_d:stars,i_d:Nor,i_d:F})
            print(F)
            print(d)
@@ -104,6 +113,7 @@ def Add():
                f.write(str(counter))
                f.write("\n")
            f.close()
+           print(F)
     except ValueError:
          print("Add():<ValueError>")
 
@@ -111,13 +121,12 @@ def Add():
 def Save():
     try:
         with open(filename,'a',newline='') as f:
-               w = csv.writer(f,delimiter=' ',quotechar = '|')
-               for key,values in d.items():
+               w = csv.writer(f,delimiter=';',quotechar = '|')
                #d = [i_d,';',name,';',stars,';',Nor,';',]#customer_name,';',checkInDate,';',DaysToStay,';']
-		   A = [key,';',values,';']
-                   w.writerow(A)
+               w.writerow(F)
         f.close()
-        del L0[:]
+        del F[:]
+        d.clear()
     except IOError:
          print("Save():<IOError>")
 
@@ -155,7 +164,7 @@ def Exit():
      Save_Exit()
      print("Saving...Thank you for using my program Have a Nice Day!!")
      del L[:]
-     del L0[:]
+     del A[:]
      #d.clear()
      exit(1)		
 
