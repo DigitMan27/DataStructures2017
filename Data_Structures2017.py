@@ -12,13 +12,11 @@ intro = """
 6. Exit
 """
 
-L0 = []
-L1 = []
-L2 = []
-L3 = []
-
+F = []
+A = []
 L = []
 d = {}
+blank = ''
 
 counter = 0
 global filename
@@ -53,29 +51,6 @@ def n_error(w):
 
 
 #OPERATIONS
-'''
-def Load():
- #obj = Reservations()
- global counter
- try:
-   with open(filename,'r') as f:
-    reader = csv.reader(f,delimiter = ';')
-    next(reader)
-    counter = sum(1 for row in reader)
-    for row in reader:
-      #H_ID = row[0]
-      #hotel_name = row[1]
-      #hotel_stars = row[2]
-      #hotel_NoR = row[3] 
-      H_ID,hotel_name,hotel_stars,hotel_NoR = row
-      L0.append(H_ID) 
-      L1.append(hotel_name)
-      L2.append(hotel_stars)
-      L3.append(hotel_NoR)
-   f.close()
- except IOError:
-   error()
-'''
 def Load():
    global counter
    try:
@@ -94,7 +69,9 @@ def Load():
 
 def Add():
     try:
-           #obj = Reservations()
+           global F
+           F = list(d)
+           del F[:]
            global counter
            global i_d
            global name
@@ -104,16 +81,41 @@ def Add():
            name = input("Name:")
            stars = input("Stars:")
            Nor = input("Num_oF_Rooms:")
-           d.update({id:name,id:stars,id:Nor})
+           customer_name = input("customer_name:")
+           if customer_name is blank:
+                    exit(1)
+           checkInDate = input("CheckInDate:")
+           DaysToStay = input("DaysToStay:")
+           F.append(i_d)
+           F.append(name)
+           F.append(stars)
+           F.append(Nor)
+           F.append(customer_name)
+           F.append(checkInDate)
+           F.append(DaysToStay)
+           print(F)
+           #d.update({id:name,id:stars,id:Nor,id:customer_name,id:checkInDate,id:DaysToStay})
            counter = len(d.keys())
-           #obj.setValues()
+           while customer_name is not blank:
+              customer_name = input("customer_name:")
+              if customer_name is blank:
+                    break
+              checkInDate = input("CheckInDate:")
+              DaysToStay = input("DaysToStay:")
+              F.append(customer_name)
+              F.append(checkInDate)
+              F.append(DaysToStay)
+           d.update({i_d:name,i_d:stars,i_d:Nor,i_d:F})
+           print(F)
+           print(d)
+           counter = len(d.keys())
            with open(filename,'r+',newline='') as f:
                content = f.read()
                f.seek(0,0)
                f.write(str(counter))
                f.write("\n")
            f.close()
-
+           print(F)
     except ValueError:
          print("Add():<ValueError>")
 
@@ -121,10 +123,12 @@ def Add():
 def Save():
     try:
         with open(filename,'a',newline='') as f:
-               w = csv.writer(f,delimiter=' ',quotechar = '|')
-               d = [i_d,';',name,';',stars,';',Nor,';']#,obj.name,';',obj.checkInDay,';',obj.DurationDays,';']
-               w.writerow(d)
+               w = csv.writer(f,delimiter=';',quotechar = '|')
+               #d = [i_d,';',name,';',stars,';',Nor,';',]#customer_name,';',checkInDate,';',DaysToStay,';']
+               w.writerow(F)
         f.close()
+        del F[:]
+        d.clear()
     except IOError:
          print("Save():<IOError>")
 
@@ -162,6 +166,7 @@ def Exit():
      Save_Exit()
      print("Saving...Thank you for using my program Have a Nice Day!!")
      del L[:]
+     del A[:]
      #d.clear()
      exit(1)		
 
@@ -180,6 +185,8 @@ def Menu(c):
         elif c==4:
              LinearSearch()
         elif c==5:
+             print("<Not Developed yet>")
+        elif c==6:
             Exit()
     #except ValueError:
      #      n_error(c)
