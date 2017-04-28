@@ -82,6 +82,8 @@ def Add():
            stars = input("Stars:")
            Nor = input("Num_oF_Rooms:")
            customer_name = input("customer_name:")
+           if customer_name is blank:
+                    exit(1)
            checkInDate = input("CheckInDate:")
            DaysToStay = input("DaysToStay:")
            F.append(i_d)
