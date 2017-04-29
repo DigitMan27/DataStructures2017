@@ -7,7 +7,7 @@ intro = """
 1. Load Hotels and Reservations from file
 2. Save Hotels and Reservations to file
 3. Add a Hotel (μαζί και τις κρατήσεις του)
-4. Search and Display a Hotel by id{1.Linear/2.Binary}
+4. Search and Display a Hotel by id{1.Linear/2.Binary/3.InterpolationSearch}
 5. Display Reservations by surname search
 6. Exit
 """
@@ -15,7 +15,8 @@ intro = """
 F = []
 A = []
 L = []
-d = {}
+d = {} #dictionary for all values(Hotels-Reserv)
+d_H = {} #dictionary only for Hotels
 blank = ''
 
 counter = 0
@@ -62,6 +63,7 @@ def Load():
          if key in d:
            pass
          d[key] = row[1:]
+         d_H[key] = row[1:4]
          counter = len(d.keys())
    except IOError:
      error() 	 
@@ -144,10 +146,19 @@ def Save_Exit():
      print("Save_Exit():<ValueError>")
 
 
+def Exit():
+     Save_Exit()
+     print("Saving...Thank you for using my program Have a Nice Day!!")
+     del L[:]
+     del A[:]
+     #d.clear()
+     exit(1)
+
+#-------------------Search Operations-------------------
 def LinearSearch_ID():
         position = 0
         found = False
-        L = list(d.keys())  #for list be int write list(map(int,d.keys()))
+        L = list(d_H.keys())  #for list be int write list(map(int,d.keys()))
         for i in range(len(L)):
            L[i] = int(L[i])
         print(L)
@@ -156,7 +167,7 @@ def LinearSearch_ID():
              if L[position] == int(ID):
                   found = True
                   #print(found)
-                  print(d[ID])
+                  print(d_H[ID])
              else:
                   position = position +1
 
@@ -177,7 +188,7 @@ def LinearSearch_Name():
 '''
 def BinarySearch():
     found = False
-    L = list(d.keys())
+    L = list(d_H.keys())
     for i in range(len(L)):
          L[i] = int(L[i])
     L.sort()
@@ -189,25 +200,43 @@ def BinarySearch():
        middle = (bottom + top)//2
        if L[middle] == int(ID):
           found = True
-          print(found)
-          print(d[ID])
+          #print(found)
+          print(d_H[ID])
        elif L[middle] < int(ID):
           bottom = middle + 1
        else:
           top = middle - 1
-          
 
 
+def InterpolationSearch():
+    found = False
+    L = list(d_H.keys())
+    size  = len(L)
+    for i in range(len(L)):
+         L[i] = int(L[i])
+    L.sort()
+    print(L)
+    ID = input("Put id for searching:")
+    bottom = 0
+    middle = -1
+    top = int(size - 1)
+    while bottom<=top and int(ID)>=L[bottom] and int(ID)<=L[top]:
+       if bottom == top | L[bottom] == L[top]:
+          print("<Search Failure>")
+          exit(1)
+       middle = bottom + round(((top-bottom)/(L[top]-L[bottom]))*(int(ID)-L[bottom]))
+       if L[middle] < int(ID):
+            bottom = middle + 1
+       elif L[middle] > int(ID):
+            top = middle - 1
+       else:
+            print("Data is in position:%d"%middle)
+            x = L[middle]  
+            print(d_H[str(x)])
+            return middle
+    return -1
 
-def Exit():
-     Save_Exit()
-     print("Saving...Thank you for using my program Have a Nice Day!!")
-     del L[:]
-     del A[:]
-     #d.clear()
-     exit(1)		
-
-
+#-----------------Main+Menu------------------
 def Menu(c):
     #try:
         c = int(c)
@@ -222,9 +251,14 @@ def Menu(c):
         elif c==4:
             search_choice = int(input("Choose Search Opt:"))
             if search_choice == 1:
+              print("Lin")
               LinearSearch_ID()
             elif search_choice == 2:
+              print("Bin:")
               BinarySearch()
+            elif search_choice == 3:
+              print("Inter:")
+              pos  = InterpolationSearch()
         elif c==5:
              LinearSearch_Name()
              #print("<Not Developed yet>")
