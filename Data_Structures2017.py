@@ -7,7 +7,7 @@ intro = """
 1. Load Hotels and Reservations from file
 2. Save Hotels and Reservations to file
 3. Add a Hotel (μαζί και τις κρατήσεις του)
-4. Search and Display a Hotel by id
+4. Search and Display a Hotel by id{1.Linear/2.Binary}
 5. Display Reservations by surname search
 6. Exit
 """
@@ -63,7 +63,6 @@ def Load():
            pass
          d[key] = row[1:]
          counter = len(d.keys())
-       #print(row[0])
    except IOError:
      error() 	 
 
@@ -124,7 +123,7 @@ def Save():
     try:
         with open(filename,'a',newline='') as f:
                w = csv.writer(f,delimiter=';',quotechar = '|')
-               #d = [i_d,';',name,';',stars,';',Nor,';',]#customer_name,';',checkInDate,';',DaysToStay,';']
+               #d = [i_d,';',name,';',stars,';',Nor,';']
                w.writerow(F)
         f.close()
         del F[:]
@@ -145,7 +144,7 @@ def Save_Exit():
      print("Save_Exit():<ValueError>")
 
 
-def LinearSearch():
+def LinearSearch_ID():
         position = 0
         found = False
         L = list(d.keys())  #for list be int write list(map(int,d.keys()))
@@ -156,9 +155,47 @@ def LinearSearch():
         while position<len(L) and not found:
              if L[position] == int(ID):
                   found = True
-                  print(found)
+                  #print(found)
+                  print(d[ID])
              else:
                   position = position +1
+
+'''
+def LinearSearch_Name():
+      position = 0
+      found = False
+      N = list(d.values())
+      print(N)
+      Name = input("Put name for searching:")
+      while position<len(L) and not found:
+           if N[position] == Name:
+              found = True
+              print(found)
+              print(d[Name])
+           else:
+              position = position + 1
+'''
+def BinarySearch():
+    found = False
+    L = list(d.keys())
+    for i in range(len(L)):
+         L[i] = int(L[i])
+    L.sort()
+    print(L)
+    ID = input("Put id for searching:")
+    bottom = 0
+    top = len(L) + 1
+    while not found and bottom <=top:
+       middle = (bottom + top)//2
+       if L[middle] == int(ID):
+          found = True
+          print(found)
+          print(d[ID])
+       elif L[middle] < int(ID):
+          bottom = middle + 1
+       else:
+          top = middle - 1
+          
 
 
 
@@ -183,9 +220,14 @@ def Menu(c):
         elif c==3:
              Add()
         elif c==4:
-             LinearSearch()
+            search_choice = int(input("Choose Search Opt:"))
+            if search_choice == 1:
+              LinearSearch_ID()
+            elif search_choice == 2:
+              BinarySearch()
         elif c==5:
-             print("<Not Developed yet>")
+             LinearSearch_Name()
+             #print("<Not Developed yet>")
         elif c==6:
             Exit()
     #except ValueError:
@@ -194,6 +236,7 @@ def Menu(c):
 
 #Main:
 print(intro)
+search_choice = 0
 while 1: 
     Menu(input("Choice:"))
     
