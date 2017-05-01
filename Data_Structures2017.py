@@ -1,3 +1,4 @@
+#Copyright (c) 2017 Konstantinos Adamopoulos All Rights Reserved.
 #!/usr/bin/python
 import csv
 import sys
@@ -267,6 +268,51 @@ def InterpolationSearch():
             return middle
     return -1
 
+
+#AVLTree == auto-Balanced BST
+#So:
+#1.Convert List with IDs in BST
+#2.BST Operations(Search,Insert)
+#3.BST -> AVLTree  
+'''
+class TreeNode:
+   def __init__(self,x):
+       self.val = x 
+       self.left = None
+   
+    self.right = None
+'''
+'''
+def Middle(L):
+  middle = float(len(L))/2
+  if middle%2 !=0:
+     return L[int(middle-.5)]
+  else:
+     return (L[int(middle)],L[int(middle-1)])
+'''
+'''
+def ListToBST():
+    L = list(d_H.keys())
+    for i in range(len(L)):
+         L[i] = int(L[i])
+    L.sort()
+    print(L)
+    start = 0
+    end = int(len(L) - 1)
+    mid = round((start+end)/2)
+    nodes = [TreeNode() for i in range(len(L))]
+    nodes[0].val = L[mid]
+    for node in nodes:
+       node.left = L[round((start+(mid-1))/2)]
+       node.right = L[round(((mid+1)+end)/2)]
+       print(node)
+    
+'''    
+    
+    
+   
+    
+
 #-----------------Main+Menu------------------
 def Menu(c):
     #try:
@@ -291,6 +337,8 @@ def Menu(c):
             elif search_choice == 3:
               print("Inter:")
               pos  = InterpolationSearch()
+            #elif search_choice == 4:
+             #     ListToBST()
         elif c==5:
              LinearSearch_Name()
              #print("<Not Developed yet>")
