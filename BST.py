@@ -65,5 +65,3 @@ else:
    print("Not found")
 #print(node,parent)
 root.Print_Tree()
-
-

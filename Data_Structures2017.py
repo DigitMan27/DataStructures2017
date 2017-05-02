@@ -2,13 +2,14 @@
 #!/usr/bin/python
 import csv
 import sys
+from AVL import *
 
 intro = """
 0. Clear CSV File
 1. Load Hotels and Reservations from file
 2. Save Hotels and Reservations to file
 3. Add a Hotel (μαζί και τις κρατήσεις του)
-4. Search and Display a Hotel by id{1.Linear/2.Binary/3.InterpolationSearch}
+4. Search and Display a Hotel by id{1.Linear/2.Binary/3.InterpolationSearch/4.AVL}
 5. Display Reservations by surname search
 6. Exit
 """
@@ -25,6 +26,7 @@ blank = ''
 counter = 0
 c = 1
 global filename
+tree = None #__init__ object value
 
 
 #File Selector
@@ -59,12 +61,15 @@ def n_error(w):
 def Load():
    global counter
    global i
+   global tree
    try:
      with open(filename,'r') as f:
        reader = csv.reader(f,delimiter = ';')
        next(reader)
+       tree = AVLTree()
        for row in reader:
          key = row[0]
+         tree.insert(int(key))
          if key in d:
            pass
          d[key] = row[1:]
@@ -269,51 +274,27 @@ def InterpolationSearch():
     return -1
 
 
+#------------------------------AVL_Data_Structure------------------------------
 #AVLTree == auto-Balanced BST
 #So:
 #1.Convert List with IDs in BST
 #2.BST Operations(Search,Insert)
-#3.BST -> AVLTree  
-'''
-class TreeNode:
-   def __init__(self,x):
-       self.val = x 
-       self.left = None
-   
-    self.right = None
-'''
-'''
-def Middle(L):
-  middle = float(len(L))/2
-  if middle%2 !=0:
-     return L[int(middle-.5)]
-  else:
-     return (L[int(middle)],L[int(middle-1)])
-'''
-'''
-def ListToBST():
-    L = list(d_H.keys())
-    for i in range(len(L)):
-         L[i] = int(L[i])
-    L.sort()
-    print(L)
-    start = 0
-    end = int(len(L) - 1)
-    mid = round((start+end)/2)
-    nodes = [TreeNode() for i in range(len(L))]
-    nodes[0].val = L[mid]
-    for node in nodes:
-       node.left = L[round((start+(mid-1))/2)]
-       node.right = L[round(((mid+1)+end)/2)]
-       print(node)
-    
-'''    
-    
-    
+#3.BST -> AVLTree    
+
+#+++++++++++++++++++++++++++++++Data_Structure_Operation+++++++++++++++++++++++++++++++
+def AVL_Find():
+   found = False
+   global tree
+   ID = int(input("Requested ID:"))
+   found = tree.find(ID)
+   print("ID found?(A:",found,")")
+   if found:
+        print(d_H[str(ID)])
+       
    
     
 
-#-----------------Main+Menu------------------
+#----------------------------------Main+Menu-----------------------------------
 def Menu(c):
     #try:
         c = int(c)
@@ -337,8 +318,8 @@ def Menu(c):
             elif search_choice == 3:
               print("Inter:")
               pos  = InterpolationSearch()
-            #elif search_choice == 4:
-             #     ListToBST()
+            elif search_choice == 4:
+                  AVL_Find()
         elif c==5:
              LinearSearch_Name()
              #print("<Not Developed yet>")
