@@ -1,13 +1,16 @@
+#Copyright (c) 2017 Konstantinos Adamopoulos All Rights Reserved.
 #!/usr/bin/python
 import csv
 import sys
+import time
+from AVL import *
 
 intro = """
-0.Clear CSV File
+0. Clear CSV File
 1. Load Hotels and Reservations from file
 2. Save Hotels and Reservations to file
 3. Add a Hotel (μαζί και τις κρατήσεις του)
-4. Search and Display a Hotel by id{1.Linear/2.Binary/3.InterpolationSearch}
+4. Search and Display a Hotel by id{1.Linear/2.Binary/3.InterpolationSearch/4.AVL}
 5. Display Reservations by surname search
 6. Exit
 """
@@ -17,10 +20,14 @@ A = []
 L = []
 d = {} #dictionary for all values(Hotels-Reserv)
 d_H = {} #dictionary only for Hotels
+d_R = {} #dictionary for Reserv
+Res = [] #list for reservations names->keys
 blank = ''
 
 counter = 0
+c = 1
 global filename
+tree = None #__init__ object value
 
 
 #File Selector
@@ -51,22 +58,49 @@ def n_error(w):
     print("%s is not a number.Please choose an Operation"%w)
 
 
-#OPERATIONS
+#-----------------OPERATIONS------------------
 def Load():
    global counter
+   global i
+   global tree
    try:
      with open(filename,'r') as f:
        reader = csv.reader(f,delimiter = ';')
        next(reader)
+       tree = AVLTree()
        for row in reader:
          key = row[0]
+         tree.insert(int(key))
          if key in d:
            pass
          d[key] = row[1:]
          d_H[key] = row[1:4]
+         #d_R[key_r] = row[6:8]
          counter = len(d.keys())
    except IOError:
-     error() 	 
+     error()
+
+
+def LoadResrv():
+    global Res
+    global c
+    try:
+     with open(filename,'r') as f:
+       reader = csv.reader(f,delimiter = ';')
+       next(reader)
+       for row in reader:
+         Res = row[4::3]
+         for i in Res:
+             d_R[i] = row[5::c]
+             if d_R[i] == row[4::3]:
+                c = c +2
+             c =c +1
+         #print(d_R)
+         #print(list(d_R.keys()))
+         #print(d_R) 
+    except IOError:
+        error()
+
 
 def Add():
     try:
@@ -148,7 +182,8 @@ def Save_Exit():
 
 def Exit():
      Save_Exit()
-     print("Saving...Thank you for using my program Have a Nice Day!!")
+     print("Saving...")
+     print("Quit")
      del L[:]
      del A[:]
      #d.clear()
@@ -171,21 +206,23 @@ def LinearSearch_ID():
              else:
                   position = position +1
 
-'''
 def LinearSearch_Name():
       position = 0
       found = False
-      N = list(d.values())
+      N = list(d_R.keys())
+      for i in range(len(N)):
+         N[i] = str(N[i])
       print(N)
       Name = input("Put name for searching:")
-      while position<len(L) and not found:
-           if N[position] == Name:
+      while position<len(N) and not found:
+           if N[position] == str(Name):
               found = True
               print(found)
-              print(d[Name])
+              print(d_R[str(Name)])
            else:
               position = position + 1
-'''
+
+
 def BinarySearch():
     found = False
     L = list(d_H.keys())
@@ -236,7 +273,28 @@ def InterpolationSearch():
             return middle
     return -1
 
-#-----------------Main+Menu------------------
+
+#------------------------------AVL_Data_Structure------------------------------
+#AVLTree == auto-Balanced BST
+#So:
+#1.Convert List with IDs in BST
+#2.BST Operations(Search,Insert)
+#3.BST -> AVLTree    
+
+#+++++++++++++++++++++++++++++++Data_Structure_Operation+++++++++++++++++++++++++++++++
+def AVL_Find():
+   found = False
+   global tree
+   ID = int(input("Requested ID:"))
+   found = tree.find(ID)
+   print("ID found?(A:",found,")")
+   if found:
+        print(d_H[str(ID)])
+       
+   
+    
+
+#----------------------------------Main+Menu-----------------------------------
 def Menu(c):
     #try:
         c = int(c)
@@ -244,6 +302,7 @@ def Menu(c):
              Clear()
         elif c==1:
              Load()
+             LoadResrv()
         elif c==2:
              Save()
         elif c==3:
@@ -252,13 +311,18 @@ def Menu(c):
             search_choice = int(input("Choose Search Opt:"))
             if search_choice == 1:
               print("Lin")
+              LinearTimeStart = time.time()
               LinearSearch_ID()
+              LineadTimeEnd = time.time()
+              print("LinearSearch Executed in:",LineadTimeEnd-LinearTimeStart,"s")
             elif search_choice == 2:
               print("Bin:")
               BinarySearch()
             elif search_choice == 3:
               print("Inter:")
               pos  = InterpolationSearch()
+            elif search_choice == 4:
+                  AVL_Find()
         elif c==5:
              LinearSearch_Name()
              #print("<Not Developed yet>")
