@@ -2,6 +2,7 @@
 #!/usr/bin/python
 import csv
 import sys
+import time
 from AVL import *
 
 intro = """
@@ -205,7 +206,6 @@ def LinearSearch_ID():
              else:
                   position = position +1
 
-
 def LinearSearch_Name():
       position = 0
       found = False
@@ -311,7 +311,10 @@ def Menu(c):
             search_choice = int(input("Choose Search Opt:"))
             if search_choice == 1:
               print("Lin")
+              LinearTimeStart = time.time()
               LinearSearch_ID()
+              LineadTimeEnd = time.time()
+              print("LinearSearch Executed in:",LineadTimeEnd-LinearTimeStart,"s")
             elif search_choice == 2:
               print("Bin:")
               BinarySearch()
