@@ -1,8 +1,9 @@
 #Copyright (c) 2017 Konstantinos Adamopoulos All Rights Reserved.
-#!/usr/bin/python
+#!/usr/bin/python3
 import csv
 import sys
 import time
+from sys import platform
 from AVL import *
 
 
@@ -19,6 +20,8 @@ counter = 0 #Initializer for Hotel counter
 c = 1
 global filename #Name of the csv file
 DEFAULT_FILENAME = "data.csv"
+WIN32_DELIMITER = ","
+LINUX_DELIMITER = ";"
 Flag = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
 
 
@@ -58,7 +61,10 @@ def Load(): #This Function Loads the Hotel Data
    global Flag
    try:
      with open(filename,'r') as f:
-       reader = csv.reader(f,delimiter = ';')
+       if platform == "linux":
+        reader = csv.reader(f,delimiter = LINUX_DELIMITER)
+       elif platform == "win32":
+        reader = csv.reader(f,delimiter = WIN32_DELIMITER)
        next(reader)
        tree = AVLTree() #Create the AVLTree
        for row in reader:
@@ -80,7 +86,10 @@ def LoadResrv(): #This Function Loads the Reservations Data
     global c
     try:
      with open(filename,'r') as f:
-       reader = csv.reader(f,delimiter = ';')
+       if platform == "linux": 
+         reader = csv.reader(f,delimiter = LINUX_DELIMITER)
+       elif platform == "win32":
+         reader = csv.reader(f,delimiter = WIN32_DELIMITER)
        next(reader)
        for row in reader:
          Res = row[4::3]
@@ -153,7 +162,10 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
 def Save():
     try:
         with open(filename,'a',newline='') as f:
-               w = csv.writer(f,delimiter=';',quotechar = '|')
+               if platform == "linux":
+                 w = csv.writer(f,delimiter=LINUX_DELIMITER,quotechar = '|')
+               elif platform == "win32":
+                 w = csv.writer(f,delimiter=WIN32_DELIMITER,quotechar = '|')
                #d = [i_d,';',name,';',stars,';',Nor,';']
                w.writerow(F)
         f.close()
