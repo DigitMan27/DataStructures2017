@@ -191,6 +191,7 @@ def Exit():
      #d.clear()
      exit(1)
 
+'''
 #-------------------Search Operations-------------------
 def LinearSearch_ID():
         position = 0
@@ -293,9 +294,9 @@ def AVL_Find():
    if found:
         print(d_H[str(ID)])
        
-   
+'''   
     
-
+'''
 #----------------------------------Main+Menu-----------------------------------
 def Menu(c):
     #try:
@@ -342,4 +343,4 @@ while 1:
     
 
 
-
+'''
