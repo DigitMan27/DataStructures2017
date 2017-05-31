@@ -59,7 +59,7 @@ def n_error(w):
 
 
 #-----------------OPERATIONS------------------
-def Load():
+def Load(): #This Function Loads the Hotel Data
    global counter
    global i
    global tree
@@ -67,21 +67,21 @@ def Load():
      with open(filename,'r') as f:
        reader = csv.reader(f,delimiter = ';')
        next(reader)
-       tree = AVLTree()
+       tree = AVLTree() #Create the AVLTree
        for row in reader:
          key = row[0]
-         tree.insert(int(key))
+         tree.insert(int(key)) #insert keys as nodes into AVLTree
          if key in d:
            pass
          d[key] = row[1:]
          d_H[key] = row[1:4]
          #d_R[key_r] = row[6:8]
-         counter = len(d.keys())
+         counter = len(d.keys()) #counts the keys where is inside the dictionary
    except IOError:
      error()
 
 
-def LoadResrv():
+def LoadResrv(): #This Function Loads the Reservations Data
     global Res
     global c
     try:
@@ -102,7 +102,7 @@ def LoadResrv():
         error()
 
 
-def Add():
+def Add(): #Add Hotels and an number of reserversions to the Hotel
     try:
            global F
            F = list(d)
@@ -146,8 +146,8 @@ def Add():
            counter = len(d.keys())
            with open(filename,'r+',newline='') as f:
                content = f.read()
-               f.seek(0,0)
-               f.write(str(counter))
+               f.seek(0,0) #find the first row,column
+               f.write(str(counter)) #save there the number of hotels
                f.write("\n")
            f.close()
            print(F)
@@ -168,7 +168,7 @@ def Save():
          print("Save():<IOError>")
 
 
-def Save_Exit():
+def Save_Exit(): #Save before Exit the Program
    try:
     with open(filename,'r+',newline='') as f:
                content = f.read()
@@ -185,7 +185,9 @@ def Exit():
      print("Saving...")
      print("Quit")
      del L[:]
+     del F[:]
      del A[:]
+     del Res[:]
      #d.clear()
      exit(1)
 
