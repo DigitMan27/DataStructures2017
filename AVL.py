@@ -167,43 +167,6 @@ class AVLTree(object):
             else:
                 return self.find(data,node.right_child)
 
-'''     
-   def plot(self,balance=False):
-       #import igraph as igraphs
-       G = igraphs.Graph()
-       if self.root is not None:
-          G.add_vertices(1)
-       queue = [[self.root,0]]
-       index = 0
-       not_break = True
-       while(not_break):
-            node = queue[0][0]
-            node_index = queue[0][1]
-            if not balance:
-               G.vs[node_index]['label'] = node.data
-            else:
-               G.vs[node_index]['label'] = node.balance
-            if index == 0:
-               G.vs[node_index]['pos'] = 'root'
-            if node.left_child is not None:
-               G.add_vertices(1)
-               G.add_edges([(node_index,index+1)])
-               queue.append([node.left_child,index+1])
-               G.vs[index+1]['pos'] = 'lch'
-               index +=1
-            if node.right_child is not None:
-               G.add_vertices(1)
-               G.add_edges([(node_index, index+1)])
-               G.vs[index+1]['pos']='rch'
-               queue.append([node.right_child, index+1])
-               index += 1
-
-            queue.pop(0)
-            if len(queue)==0:
-               not_break = False
-       layout = G.layout_reingold_tilford(root=0)
-       igraphs.plot(G,layout=layout)  
-'''
 
 '''
 #------------------------------------/Example/------------------------------------
@@ -212,7 +175,6 @@ l.sort()
 B = AVLTree()
 for item in l:
     B.insert(item)
-   # B.plot(True)
 
 ID = int(input("ID for searching:"))
 found = B.find(ID)
