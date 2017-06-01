@@ -7,53 +7,53 @@ import Operations #import the module as it is and with Operations.<name> put par
 def LinearSearch_ID():
         position = 0
         found = False
-        L = list(d_H.keys())  #for list be int write list(map(int,d.keys()))
-        for i in range(len(L)):
-           L[i] = int(L[i])
-        print(L)
+        SEARCH_LIST = list(HOTEL_DICT.keys())  #for list be int write list(map(int,d.keys()))
+        for i in range(len(SEARCH_LIST)):
+           SEARCH_LIST[i] = int(SEARCH_LIST[i])
+        print(SEARCH_LIST)
         ID = input("Put id for searching:")
-        while position<len(L) and not found:
-             if L[position] == int(ID):
+        while position<len(SEARCH_LIST) and not found:
+             if SEARCH_LIST[position] == int(ID):
                   found = True
                   #print(found)
-                  print(d_H[ID])
+                  print(HOTEL_DICT[ID])
              else:
                   position = position +1
 
 def LinearSearch_Name():
       position = 0
       found = False
-      N = list(d_R.keys())
-      for i in range(len(N)):
-         N[i] = str(N[i])
-      print(N)
+      LINEAR_SEARCH_NAMES_LIST = list(RESERVATIONS_DICT.keys())
+      for i in range(len(LINEAR_SEARCH_NAMES_LIST)):
+         LINEAR_SEARCH_NAMES_LIST[i] = str(LINEAR_SEARCH_NAMES_LIST[i])
+      print(LINEAR_SEARCH_NAMES_LIST)
       Name = input("Put name for searching:")
-      while position<len(N) and not found:
-           if N[position] == str(Name):
+      while position<len(LINEAR_SEARCH_NAMES_LIST) and not found:
+           if LINEAR_SEARCH_NAMES_LIST[position] == str(Name):
               found = True
               print(found)
-              print(d_R[str(Name)])
+              print(RESERVATIONS_DICT[str(Name)])
            else:
               position = position + 1
 
 
 def BinarySearch():
     found = False
-    L = list(d_H.keys())
-    for i in range(len(L)):
-         L[i] = int(L[i])
-    L.sort()
-    print(L)
+    SEARCH_LIST = list(HOTEL_DICT.keys())
+    for i in range(len(SEARCH_LIST)):
+         SEARCH_LIST[i] = int(SEARCH_LIST[i])
+    SEARCH_LIST.sort()
+    print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
-    top = len(L) + 1
+    top = len(SEARCH_LIST) + 1
     while not found and bottom <=top:
        middle = (bottom + top)//2
-       if L[middle] == int(ID):
+       if SEARCH_LIST[middle] == int(ID):
           found = True
           #print(found)
-          print(d_H[ID])
-       elif L[middle] < int(ID):
+          print(HOTEL_DICT[ID])
+       elif SEARCH_LIST[middle] < int(ID):
           bottom = middle + 1
        else:
           top = middle - 1
@@ -61,29 +61,29 @@ def BinarySearch():
 
 def InterpolationSearch():
     found = False
-    L = list(d_H.keys())
-    size  = len(L)
-    for i in range(len(L)):
-         L[i] = int(L[i])
-    L.sort()
-    print(L)
+    SEARCH_LIST = list(HOTEL_DICT.keys())
+    size  = len(SEARCH_LIST)
+    for i in range(len(SEARCH_LIST)):
+         SEARCH_LIST[i] = int(SEARCH_LIST[i])
+    SEARCH_LIST.sort()
+    print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
     middle = -1
     top = int(size - 1)
-    while bottom<=top and int(ID)>=L[bottom] and int(ID)<=L[top]:
-       if bottom == top | L[bottom] == L[top]:
+    while bottom<=top and int(ID)>=SEARCH_LIST[bottom] and int(ID)<=SEARCH_LIST[top]:
+       if bottom == top | SEARCH_LIST[bottom] == SEARCH_LIST[top]:
           print("<Search Failure>")
           exit(1)
-       middle = bottom + round(((top-bottom)/(L[top]-L[bottom]))*(int(ID)-L[bottom]))
-       if L[middle] < int(ID):
+       middle = bottom + round(((top-bottom)/(SEARCH_LIST[top]-SEARCH_LIST[bottom]))*(int(ID)-SEARCH_LIST[bottom]))
+       if SEARCH_LIST[middle] < int(ID):
             bottom = middle + 1
-       elif L[middle] > int(ID):
+       elif SEARCH_LIST[middle] > int(ID):
             top = middle - 1
        else:
             print("Data is in position:%d"%middle)
-            x = L[middle]  
-            print(d_H[str(x)])
+            x = SEARCH_LIST[middle]  
+            print(HOTEL_DICT[str(x)])
             return middle
     return -1
 
@@ -98,10 +98,8 @@ def InterpolationSearch():
 #+++++++++++++++++++++++++++++++Data_Structure_Operation+++++++++++++++++++++++++++++++
 def AVL_Find():
    found = False
-   #global tree
-   
    ID = int(input("Requested ID:"))
-   found = Operations.tree.find(ID)
+   found = Operations.TREE.find(ID)
    print("ID found?(A:",found,")")
    if found:
-        print(d_H[str(ID)])
+        print(HOTEL_DICT[str(ID)])

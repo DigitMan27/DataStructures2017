@@ -11,38 +11,38 @@ MENU_STR = """
 """
 
 
-def Menu(c):
+def MENU(CHOOSE):
     #try:
-        c = int(c)
-        if c==0:
+        CHOOSE = int(CHOOSE)
+        if CHOOSE==0:
              Clear()
-        elif c==1:
+        elif CHOOSE==1:
              Load()
              LoadResrv()
-        elif c==2:
+        elif CHOOSE==2:
              Save()
-        elif c==3:
+        elif CHOOSE==3:
              Add()
-        elif c==4:
-            search_choice = int(input("Choose Search Opt:"))
-            if search_choice == 1:
+        elif CHOOSE==4:
+            SEARCH_CHOICE = int(input("Choose Search Opt:"))
+            if SEARCH_CHOICE == 1:
               print("Lin")
               LinearTimeStart = time.time()
               LinearSearch_ID()
               LineadTimeEnd = time.time()
               print("LinearSearch Executed in:",LineadTimeEnd-LinearTimeStart,"s")
-            elif search_choice == 2:
+            elif SEARCH_CHOICE == 2:
               print("Bin:")
               BinarySearch()
-            elif search_choice == 3:
+            elif SEARCH_CHOICE == 3:
               print("Inter:")
               pos  = InterpolationSearch()
-            elif search_choice == 4:
+            elif SEARCH_CHOICE == 4:
                   AVL_Find()
-        elif c==5:
+        elif CHOOSE==5:
              LinearSearch_Name()
              #print("<Not Developed yet>")
-        elif c==6:
+        elif CHOOSE==6:
             Exit()
     #except ValueError:
      #      n_error(c)
@@ -52,7 +52,7 @@ if __name__=="__main__":
  from Operations import *
  from SearchOperations import *
  print(MENU_STR)
- tree = None #__init__ object value
- search_choice = 0
- while 1: 
-    Menu(input("Choice:"))
+ TREE = None #__init__ object value
+ SEARCH_CHOICE = -1
+ while True: 
+    MENU(input("Choice:"))

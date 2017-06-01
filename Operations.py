@@ -1,31 +1,43 @@
 #Copyright (c) 2017 Konstantinos Adamopoulos All Rights Reserved.
-#!/usr/bin/python3
+
+#!/usr/bin/python
+
+#IN ALL FILES
+#-TODO BETTER EXCEPTION HANDLING
+#-TODO BETTER COMMENTARY
+#-TODO AND WHATEVER I THINK THAT MOMENT
+
+#--------Modules--------
 import csv
 import sys
 import time
 from sys import platform
 from AVL import *
 
-
-F = []
-A = []
-L = []
-d = {} #dictionary for all values(Hotels-Reserv)
-d_H = {} #dictionary only for Hotels
-d_R = {} #dictionary for Reserv
-Res = [] #list for reservations names->keys
-blank = ''
-
-counter = 0 #Initializer for Hotel counter
-c = 1
 global filename #Name of the csv file
+
+#--------Dictionaries--------
+DATA_FULL_DICT = {} #dictionary for all values(Hotels-Reserv)
+HOTEL_DICT = {} #dictionary only for Hotels
+RESERVATIONS_DICT = {} #dictionary for Reserv
+
+#--------Lists--------
+DATA_FULL_LIST = []
+LINEAR_SEARCH_NAMES_LIST = []
+SEARCH_LIST = []
+RESERVATIONS_LIST = [] #list for reservations names->keys
+
+#--------Variables--------
+BLANK = ''
+HOTEL_COUNTER = 0 #Initializer for Hotel counter
+COLUMN_STEP = 1
 DEFAULT_FILENAME = "data.csv"
 WIN32_DELIMITER = ","
 LINUX_DELIMITER = ";"
-Flag = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
+FLAG = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
+NEWLINE = '\n'
 
-
-#File Selector
+#---------------------------------------File Selector---------------------------------------
 if len(sys.argv)<2:
 	filename = DEFAULT_FILENAME
 else:
@@ -34,31 +46,31 @@ else:
 print(filename)
 
 
-#------------------------Data Cleaner---------------------
+#---------------------------------------Data Cleaner---------------------------------------
 def Clear():
-     ch = str(input("Clear?(Y/N):"))
-     if ch == 'Y'or ch=='y':
+     choice = str(input("Clear?(Y/N):"))
+     if choice == 'Y'or choice == 'y':
        f = open(filename,'w+')
        f.close()
        print("Success")
-     elif ch=='N'or ch=='n':
+     elif choice == 'N'or choice == 'n':
           print("CSV File clear failed")
 
 
-#---------------------Error Functions-------------------
-def error():
-    print("csv file not found")
+#---------------------------------------Error Functions---------------------------------------
+def fileError(filename):
+    print(filename,"not found")
     
-def n_error(w):
-    print("%s is not a number.Please choose an Operation"%w)
+def NumberError(number):
+    print("%s is not a number.Please choose an Operation"%number)
 
 
-#---------------------OPERATIONS-----------------------
+#---------------------------------------OPERATIONS---------------------------------------
 def Load(): #This Function Loads the Hotel Data
-   global counter
-   global i
-   global tree
-   global Flag
+   global HOTEL_COUNTER
+   #global i
+   global TREE
+   global FLAG
    try:
      with open(filename,'r') as f:
        if platform == "linux":
@@ -66,24 +78,24 @@ def Load(): #This Function Loads the Hotel Data
        elif platform == "win32":
         reader = csv.reader(f,delimiter = WIN32_DELIMITER)
        next(reader)
-       tree = AVLTree() #Create the AVLTree
+       TREE = AVLTree() #Create the AVLTree
        for row in reader:
          key = row[0]
-         tree.insert(int(key)) #insert keys as nodes into AVLTree
-         if key in d:
+         TREE.insert(int(key)) #insert keys as nodes into AVLTree
+         if key in DATA_FULL_DICT:
            pass
-         d[key] = row[1:]
-         d_H[key] = row[1:4]
+         DATA_FULL_DICT[key] = row[1:]
+         HOTEL_DICT[key] = row[1:4]
          #d_R[key_r] = row[6:8]
-         counter = len(d.keys()) #counts the keys where is inside the dictionary
+         HOTEL_COUNTER = len(DATA_FULL_DICT.keys()) #counts the keys where is inside the dictionary
    except IOError:
-       Flag = True
-       error()
+       FLAG = True
+       fileError()
 
 
 def LoadResrv(): #This Function Loads the Reservations Data
-    global Res
-    global c
+    global RESERVATIONS_LIST
+    global COLUMN_STEP
     try:
      with open(filename,'r') as f:
        if platform == "linux": 
@@ -92,26 +104,26 @@ def LoadResrv(): #This Function Loads the Reservations Data
          reader = csv.reader(f,delimiter = WIN32_DELIMITER)
        next(reader)
        for row in reader:
-         Res = row[4::3]
-         for i in Res:
-             d_R[i] = row[5::c]
-             if d_R[i] == row[4::3]:
-                c = c +2
-             c =c +1
+         RESERVATIONS_LIST = row[4::3]
+         for i in RESERVATIONS_LIST:
+             RESERVATIONS_DICT[i] = row[5::COLUMN_STEP]
+             if RESERVATIONS_DICT[i] == row[4::3]:
+                COLUMN_STEP = COLUMN_STEP + 2
+             COLUMN_STEP = COLUMN_STEP + 1
          #print(d_R)
          #print(list(d_R.keys()))
          #print(d_R) 
     except IOError:
-       if Flag is not True:
-         error()
+       if FLAG is not True:
+         fileError()
 
 
 def Add(): #Add Hotels and an number of reserversions to the Hotel
     try:
-           global F
-           F = list(d)
-           del F[:]
-           global counter
+           global DATA_FULL_LIST
+           DATA_FULL_LIST = list(DATA_FULL_DICT)
+           del DATA_FULL_LIST[:]
+           global HOTEL_COUNTER
            global i_d
            global name
            global stars
@@ -121,40 +133,40 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            stars = input("Stars:")
            Nor = input("Num_oF_Rooms:")
            customer_name = input("customer_name:")
-           if customer_name is blank:
+           if customer_name is BLANK:
                     exit(1)
            checkInDate = input("CheckInDate:")
            DaysToStay = input("DaysToStay:")
-           F.append(i_d)
-           F.append(name)
-           F.append(stars)
-           F.append(Nor)
-           F.append(customer_name)
-           F.append(checkInDate)
-           F.append(DaysToStay)
-           print(F)
+           DATA_FULL_LIST.append(i_d)
+           DATA_FULL_LIST.append(name)
+           DATA_FULL_LIST.append(stars)
+           DATA_FULL_LIST.append(Nor)
+           DATA_FULL_LIST.append(customer_name)
+           DATA_FULL_LIST.append(checkInDate)
+           DATA_FULL_LIST.append(DaysToStay)
+           print(DATA_FULL_LIST)
            #d.update({id:name,id:stars,id:Nor,id:customer_name,id:checkInDate,id:DaysToStay})
-           counter = len(d.keys())
-           while customer_name is not blank:
+           HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
+           while customer_name is not BLANK:
               customer_name = input("customer_name:")
-              if customer_name is blank:
+              if customer_name is BLANK:
                     break
               checkInDate = input("CheckInDate:")
               DaysToStay = input("DaysToStay:")
-              F.append(customer_name)
-              F.append(checkInDate)
-              F.append(DaysToStay)
-           d.update({i_d:name,i_d:stars,i_d:Nor,i_d:F})
-           print(F)
-           print(d)
-           counter = len(d.keys())
+              DATA_FULL_LIST.append(customer_name)
+              DATA_FULL_LIST.append(checkInDate)
+              DATA_FULL_LIST.append(DaysToStay)
+           DATA_FULL_DICT.update({i_d:name,i_d:stars,i_d:Nor,i_d:DATA_FULL_LIST})
+           print(DATA_FULL_LIST)
+           print(DATA_FULL_DICT)
+           HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
            with open(filename,'r+',newline='') as f:
                content = f.read()
                f.seek(0,0) #find the first row,column
-               f.write(str(counter)) #save there the number of hotels
-               f.write("\n")
+               f.write(str(HOTEL_COUNTER)) #save there the number of hotels
+               f.write(NEWLINE)
            f.close()
-           print(F)
+           print(DATA_FULL_LIST)
     except ValueError:
          print("Add():<ValueError>")
 
@@ -167,21 +179,21 @@ def Save():
                elif platform == "win32":
                  w = csv.writer(f,delimiter=WIN32_DELIMITER,quotechar = '|')
                #d = [i_d,';',name,';',stars,';',Nor,';']
-               w.writerow(F)
+               w.writerow(DATA_FULL_LIST)
         f.close()
-        del F[:]
-        d.clear()
+        del DATA_FULL_LIST[:]
+        DATA_FULL_DICT.clear()
     except IOError:
          print("Save():<IOError>")
 
 
-def Save_Exit(): #Save before Exit the Program
+def Save_ON_Exit(): #Save before Exit the Program
    try:
     with open(filename,'r+',newline='') as f:
                content = f.read()
                f.seek(0,0)
-               f.write(str(counter))
-               f.write("\n")
+               f.write(str(HOTEL_COUNTER))
+               f.write(NEWLINE)
     f.close()
    except ValueError:
      print("Save_Exit():<ValueError>")
@@ -190,12 +202,11 @@ def Save_Exit(): #Save before Exit the Program
 
 
 def Exit():
-     Save_Exit()
+     Save_ON_Exit()
      print("Saving...")
-     print("Quit")
-     del L[:]
-     del F[:]
-     del A[:]
-     del Res[:]
+     print("Quit.")
+     del SEARCH_LIST[:]
+     del DATA_FULL_LIST[:]
+     del RESERVATIONS_LIST[:]
      #d.clear()
-     exit(1)
+     exit(0)
