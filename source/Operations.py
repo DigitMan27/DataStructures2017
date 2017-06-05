@@ -1,5 +1,3 @@
-#Copyright (c) 2017 Konstantinos Adamopoulos All Rights Reserved.
-
 #!/usr/bin/python
 
 #IN ALL FILES
@@ -7,10 +5,15 @@
 #-TODO BETTER COMMENTARY
 #-TODO AND WHATEVER I THINK THAT MOMENT
 
+#IN THAT FILE
+#-TODO IF i 1st customer name is blank program stops
+#-TODO IF csv is empty and i load it throws error
+
 #--------Modules--------
 import csv
 import sys
 import time
+import os
 from sys import platform
 from AVL import *
 
@@ -31,7 +34,7 @@ RESERVATIONS_LIST = [] #list for reservations names->keys
 BLANK = ''
 HOTEL_COUNTER = 0 #Initializer for Hotel counter
 COLUMN_STEP = 1
-DEFAULT_FILENAME = "data.csv"
+DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv")
 WIN32_DELIMITER = ","
 LINUX_DELIMITER = ";"
 FLAG = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
