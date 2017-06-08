@@ -5,10 +5,6 @@
 #-TODO BETTER COMMENTARY
 #-TODO AND WHATEVER I THINK THAT MOMENT
 
-#IN THAT FILE
-#-TODO IF i 1st customer name is blank program stops
-#-TODO IF csv is empty and i load it throws error
-
 #--------Modules--------
 import csv
 import sys
@@ -75,6 +71,9 @@ def Load(): #This Function Loads the Hotel Data
    global TREE
    global FLAG
    try:
+    if os.stat(filename).st_size == 0:
+       print(">CSV File is empty!")
+    else:
      with open(filename,'r') as f:
        if platform == "linux":
         reader = csv.reader(f,delimiter = LINUX_DELIMITER)
@@ -100,7 +99,8 @@ def LoadResrv(): #This Function Loads the Reservations Data
     global RESERVATIONS_LIST
     global COLUMN_STEP
     try:
-     with open(filename,'r') as f:
+     if os.stat(filename).st_size != 0:
+      with open(filename,'r') as f:
        if platform == "linux": 
          reader = csv.reader(f,delimiter = LINUX_DELIMITER)
        elif platform == "win32":
@@ -137,7 +137,7 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            Nor = input("Num_oF_Rooms:")
            customer_name = input("customer_name:")
            if customer_name is BLANK:
-                    exit(1)
+                   return
            checkInDate = input("CheckInDate:")
            DaysToStay = input("DaysToStay:")
            DATA_FULL_LIST.append(i_d)

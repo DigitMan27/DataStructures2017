@@ -46,14 +46,14 @@ def BinarySearch():
     print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
-    top = len(SEARCH_LIST) + 1
+    top = len(SEARCH_LIST) #+ 1
     while not found and bottom <=top:
        middle = (bottom + top)//2
-       if SEARCH_LIST[middle] == int(ID):
+       if SEARCH_LIST[int(middle)] == int(ID):
           found = True
           #print(found)
           print(HOTEL_DICT[ID])
-       elif SEARCH_LIST[middle] < int(ID):
+       elif SEARCH_LIST[int(middle)] < int(ID):
           bottom = middle + 1
        else:
           top = middle - 1
@@ -70,12 +70,13 @@ def InterpolationSearch():
     ID = input("Put id for searching:")
     bottom = 0
     middle = -1
-    top = int(size - 1)
-    while bottom<=top and int(ID)>=SEARCH_LIST[bottom] and int(ID)<=SEARCH_LIST[top]:
-       if bottom == top | SEARCH_LIST[bottom] == SEARCH_LIST[top]:
-          print("<Search Failure>")
-          exit(1)
+    top = size - 1
+    while SEARCH_LIST[bottom] != SEARCH_LIST[top] and int(ID)>=SEARCH_LIST[bottom] and int(ID)<=SEARCH_LIST[top]:
+       #if bottom == top | SEARCH_LIST[bottom] == SEARCH_LIST[top]:
+        #  print("<Search Failure>")
+         # exit(1)
        middle = bottom + round(((top-bottom)/(SEARCH_LIST[top]-SEARCH_LIST[bottom]))*(int(ID)-SEARCH_LIST[bottom]))
+       #mid = low + ((iD-L[low])*(high-low)//(L[high]-L[low]))
        if SEARCH_LIST[middle] < int(ID):
             bottom = middle + 1
        elif SEARCH_LIST[middle] > int(ID):
@@ -85,7 +86,11 @@ def InterpolationSearch():
             x = SEARCH_LIST[middle]  
             print(HOTEL_DICT[str(x)])
             return middle
-    return -1
+    if int(ID) == SEARCH_LIST[bottom]:
+       print("Data is in position:%d"%bottom)
+       return bottom
+    else:
+      return -1
 
 
 #------------------------------AVL_Data_Structure------------------------------
