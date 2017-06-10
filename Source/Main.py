@@ -1,4 +1,5 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+
 
 MENU_STR = """
 0. Clear CSV File
@@ -12,7 +13,6 @@ MENU_STR = """
 
 
 def MENU(CHOOSE):
-    #try:
         CHOOSE = int(CHOOSE)
         if CHOOSE==0:
              Clear()
@@ -26,33 +26,27 @@ def MENU(CHOOSE):
         elif CHOOSE==4:
             SEARCH_CHOICE = int(input("Choose Search Opt:"))
             if SEARCH_CHOICE == 1:
-              print("Lin")
               LinearTimeStart = time.time()
               LinearSearch_ID()
               LineadTimeEnd = time.time()
               print("LinearSearch Executed in:",LineadTimeEnd-LinearTimeStart,"s")
             elif SEARCH_CHOICE == 2:
-              print("Bin:")
               BinarySearch()
             elif SEARCH_CHOICE == 3:
-              print("Inter:")
               pos  = InterpolationSearch()
             elif SEARCH_CHOICE == 4:
                   AVL_Find()
         elif CHOOSE==5:
              LinearSearch_Name()
-             #print("<Not Developed yet>")
         elif CHOOSE==6:
             Exit()
-    #except ValueError:
-     #      n_error(c)
 
 
 if __name__=="__main__":
- from Operations import *
- from SearchOperations import *
- print(MENU_STR)
- TREE = None #__init__ object value
- SEARCH_CHOICE = -1
- while True: 
-    MENU(input("Choice:"))
+   from Operations import *
+   from SearchOperations import *
+   print(MENU_STR)
+   TREE = None #__init__ object value
+   SEARCH_CHOICE = -1 #init choice
+   while True: 
+      MENU(input("Choice:"))

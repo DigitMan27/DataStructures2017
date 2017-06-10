@@ -12,8 +12,8 @@ then
   echo "None Option"
   echo ">Welcome To the Execution Program"
   echo ">Execute..."
-  python3 ../source/Main.py  #Default csv file
-  rm -rf ../source/__pycache__
+  python3 ../Source/Main.py  #Default csv file
+  rm -rf ../Source/__pycache__
   echo ">Thank You"
 elif [ "$1" -eq "1" ]
 then
@@ -21,8 +21,8 @@ then
   echo "OPTION $1"
   echo ">Welcome To the Execution Program"
   echo ">Execute..."
-  python3 ../source/Main.py ${CSVfilePath}  #User csv file
-  rm -rf ../source/__pycache__
+  python3 ../Source/Main.py ${CSVfilePath}  #User csv file
+  rm -rf ../Source/__pycache__
   echo ">Thank You"
 elif [ "$1" -eq "2" ]
 then
@@ -30,8 +30,8 @@ then
   echo "OPTION $1"
   echo ">Welcome To the Execution Program"
   echo ">Execute..."
-  python3 ../source/Main.py $2  #csv file from another path
-  rm -rf ../source/__pycache__
+  python3 ../Source/Main.py $2  #csv file from another path
+  rm -rf ../Source/__pycache__
   echo ">Thank You"
 else
   echo ">ERROR!!"
