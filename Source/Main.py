@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 MENU_STR = """
 0. Clear CSV File
@@ -12,7 +12,6 @@ MENU_STR = """
 
 
 def MENU(CHOOSE):
-    #try:
         CHOOSE = int(CHOOSE)
         if CHOOSE==0:
              Clear()
@@ -44,8 +43,6 @@ def MENU(CHOOSE):
              #print("<Not Developed yet>")
         elif CHOOSE==6:
             Exit()
-    #except ValueError:
-     #      n_error(c)
 
 
 if __name__=="__main__":
@@ -53,6 +50,6 @@ if __name__=="__main__":
  from SearchOperations import *
  print(MENU_STR)
  TREE = None #__init__ object value
- SEARCH_CHOICE = -1
+ SEARCH_CHOICE = -1 #init choice
  while True: 
     MENU(input("Choice:"))

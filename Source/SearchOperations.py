@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 from Operations import * #import global var + functions
 import Operations #import the module as it is and with Operations.<name> put particular variable
 
@@ -15,7 +15,6 @@ def LinearSearch_ID():
         while position<len(SEARCH_LIST) and not found:
              if SEARCH_LIST[position] == int(ID):
                   found = True
-                  #print(found)
                   print(HOTEL_DICT[ID])
              else:
                   position = position +1
@@ -46,12 +45,11 @@ def BinarySearch():
     print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
-    top = len(SEARCH_LIST) #+ 1
+    top = len(SEARCH_LIST)
     while not found and bottom <=top:
        middle = (bottom + top)//2
        if SEARCH_LIST[int(middle)] == int(ID):
           found = True
-          #print(found)
           print(HOTEL_DICT[ID])
        elif SEARCH_LIST[int(middle)] < int(ID):
           bottom = middle + 1
@@ -72,11 +70,7 @@ def InterpolationSearch():
     middle = -1
     top = size - 1
     while SEARCH_LIST[bottom] != SEARCH_LIST[top] and int(ID)>=SEARCH_LIST[bottom] and int(ID)<=SEARCH_LIST[top]:
-       #if bottom == top | SEARCH_LIST[bottom] == SEARCH_LIST[top]:
-        #  print("<Search Failure>")
-         # exit(1)
        middle = bottom + round(((top-bottom)/(SEARCH_LIST[top]-SEARCH_LIST[bottom]))*(int(ID)-SEARCH_LIST[bottom]))
-       #mid = low + ((iD-L[low])*(high-low)//(L[high]-L[low]))
        if SEARCH_LIST[middle] < int(ID):
             bottom = middle + 1
        elif SEARCH_LIST[middle] > int(ID):
@@ -91,14 +85,6 @@ def InterpolationSearch():
        return bottom
     else:
       return -1
-
-
-#------------------------------AVL_Data_Structure------------------------------
-#AVLTree == auto-Balanced BST
-#So:
-#1.Convert List with IDs in BST
-#2.BST Operations(Search,Insert)
-#3.BST -> AVLTree    
 
 #+++++++++++++++++++++++++++++++Data_Structure_Operation+++++++++++++++++++++++++++++++
 def AVL_Find():
