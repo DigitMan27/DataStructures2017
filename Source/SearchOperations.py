@@ -10,7 +10,6 @@ def LinearSearch_ID():
         SEARCH_LIST = list(HOTEL_DICT.keys())  #for list be int write list(map(int,d.keys()))
         for i in range(len(SEARCH_LIST)):
            SEARCH_LIST[i] = int(SEARCH_LIST[i])
-        print(SEARCH_LIST)
         ID = input("Put id for searching:")
         while position<len(SEARCH_LIST) and not found:
              if SEARCH_LIST[position] == int(ID):
@@ -25,12 +24,10 @@ def LinearSearch_Name():
       LINEAR_SEARCH_NAMES_LIST = list(RESERVATIONS_DICT.keys())
       for i in range(len(LINEAR_SEARCH_NAMES_LIST)):
          LINEAR_SEARCH_NAMES_LIST[i] = str(LINEAR_SEARCH_NAMES_LIST[i])
-      print(LINEAR_SEARCH_NAMES_LIST)
       Name = input("Put name for searching:")
       while position<len(LINEAR_SEARCH_NAMES_LIST) and not found:
            if LINEAR_SEARCH_NAMES_LIST[position] == str(Name):
               found = True
-              print(found)
               print(RESERVATIONS_DICT[str(Name)])
            else:
               position = position + 1
@@ -42,10 +39,9 @@ def BinarySearch():
     for i in range(len(SEARCH_LIST)):
          SEARCH_LIST[i] = int(SEARCH_LIST[i])
     SEARCH_LIST.sort()
-    print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
-    top = len(SEARCH_LIST)
+    top = len(SEARCH_LIST) -1
     while not found and bottom <=top:
        middle = (bottom + top)//2
        if SEARCH_LIST[int(middle)] == int(ID):
@@ -64,7 +60,6 @@ def InterpolationSearch():
     for i in range(len(SEARCH_LIST)):
          SEARCH_LIST[i] = int(SEARCH_LIST[i])
     SEARCH_LIST.sort()
-    print(SEARCH_LIST)
     ID = input("Put id for searching:")
     bottom = 0
     middle = -1
@@ -91,6 +86,5 @@ def AVL_Find():
    found = False
    ID = int(input("Requested ID:"))
    found = Operations.TREE.find(ID)
-   print("ID found?(A:",found,")")
    if found:
         print(HOTEL_DICT[str(ID)])

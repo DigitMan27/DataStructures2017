@@ -139,7 +139,7 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            DATA_FULL_LIST.append(customer_name)
            DATA_FULL_LIST.append(checkInDate)
            DATA_FULL_LIST.append(DaysToStay)
-           print(DATA_FULL_LIST)
+           #print(DATA_FULL_LIST)
            HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
            while customer_name is not BLANK:
               customer_name = input("customer_name:")
@@ -151,8 +151,6 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
               DATA_FULL_LIST.append(checkInDate)
               DATA_FULL_LIST.append(DaysToStay)
            DATA_FULL_DICT.update({i_d:name,i_d:stars,i_d:Nor,i_d:DATA_FULL_LIST})
-           print(DATA_FULL_LIST)
-           print(DATA_FULL_DICT)
            HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
            with open(filename,'r+',newline='') as f:
                content = f.read()
