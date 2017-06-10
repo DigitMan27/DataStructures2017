@@ -172,6 +172,7 @@ def Save():
                  w = csv.writer(f,delimiter=WIN32_DELIMITER,quotechar = '|')
                w.writerow(DATA_FULL_LIST)
         f.close()
+        print("Save Successful...")
         del DATA_FULL_LIST[:]
         DATA_FULL_DICT.clear()
     except IOError:
