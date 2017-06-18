@@ -76,13 +76,3 @@ def InterpolationSearch(L):
     else:
       return -1
     return count
-
-def Listing(N):
-    L = []
-    for i in range(N):
-        L.append(random.randint(N,2*N))
-    return L
-
-P = []
-P = Listing(1500) #number of ids
-

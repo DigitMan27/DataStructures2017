@@ -1,7 +1,8 @@
 from BenchFunc import *
+from CSV_TO_LIST import *
 
 def LinBench():
-   P.reverse()
+   key.reverse()
    res = []
    pop = 0
    avg = 0.0
@@ -15,7 +16,7 @@ def LinBench():
     #for i in range(1000):
        #for j in range()
        #start = time.time()
-       pop = LinearSearch(P)
+       pop = LinearSearch(key)
        #end = time.time() - s
        #pop = BinarySearch(P)
        res.append(round(pop))
@@ -26,7 +27,7 @@ def LinBench():
        #end = time.time()
        #res = end - start
     #end = time.time() - s 
-       avg = sum(res)/(len(P)-1)
+       avg = sum(res)/(len(key)-1)
        f.write(str(times)+" "+str(round(avg))+"\n")
     #f1.write(str(times)+" "+str(end)+"\n")
        times = times+1
@@ -37,5 +38,5 @@ def LinBench():
    f.close()
    #f1.close()
    #del P[:]
-
+Load()
 LinBench()

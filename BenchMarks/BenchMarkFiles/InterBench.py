@@ -1,8 +1,8 @@
 from BenchFunc import *
+from CSV_TO_LIST import *
 
 def InterBench():
-   #P = Listing(10000)
-   #P.reverse()
+   key.reverse()
    res = []
    pop = 0
    avg = 0.0
@@ -12,9 +12,9 @@ def InterBench():
    f = open("Ibench.txt","w")
    #f1 = open("time.txt","w")
    while(times<1000):
-       pop = InterpolationSearch(P)
+       pop = InterpolationSearch(key)
        res.append(pop)
-       avg = sum(res)/(len(P)-1)
+       avg = sum(res)/(len(key)-1)
        f.write(str(times)+" "+str(round(avg))+"\n")
     #f1.write(str(times)+" "+str(end)+"\n")
        times = times+1
@@ -24,5 +24,5 @@ def InterBench():
    del res[:]
    f.close()
    #f1.close()
-
+Load()
 InterBench()
