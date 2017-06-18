@@ -15,7 +15,7 @@ def BinBench():
        pop = BinarySearch(key)
        res.append(pop) 
        avg = sum(res)/(len(key)-1)
-       f.write(str(times)+" "+str(round(avg))+"\n")
+       f.write(str(times)+" "+str(avg)+"\n")
     #f1.write(str(times)+" "+str(end)+"\n")
        times = times+1
        #avg =  0
