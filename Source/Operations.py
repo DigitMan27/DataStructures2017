@@ -116,8 +116,8 @@ def LoadResrv(): #This Function Loads the Reservations Data
 def Add(): #Add Hotels and an number of reserversions to the Hotel
     try:
            global DATA_FULL_LIST
-           DATA_FULL_LIST = list(DATA_FULL_DICT)
-           del DATA_FULL_LIST[:]
+           #DATA_FULL_LIST = list(DATA_FULL_DICT)
+           #del DATA_FULL_LIST[:]
            global HOTEL_COUNTER
            global i_d #ID of the Hotel
            global name #Name of the Hotel
@@ -139,7 +139,6 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            DATA_FULL_LIST.append(customer_name)
            DATA_FULL_LIST.append(checkInDate)
            DATA_FULL_LIST.append(DaysToStay)
-           #print(DATA_FULL_LIST)
            HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
            while customer_name is not BLANK:
               customer_name = input("customer_name:")
@@ -161,6 +160,9 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            print(DATA_FULL_LIST)
     except ValueError:
          print("Add():<ValueError>")
+    except IOError:
+         fileError()
+         
 
 	
 def Save():
@@ -177,6 +179,7 @@ def Save():
         DATA_FULL_DICT.clear()
     except IOError:
          print("Save():<IOError>")
+         fileError()
 
 
 def Save_ON_Exit(): #Save before Exit the Program

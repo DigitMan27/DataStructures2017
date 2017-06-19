@@ -3,9 +3,9 @@
 CSVfilePath=../CSVFiles/$2
 if [ "$1" == "-h" ]
 then
-  echo "None option -> Default File"
-  echo "If \$1=1 -> file from CSVFIles path"
-  echo "If \$1=2 -> file from other path"
+  echo "None Option:Default File(data.csv)"
+  echo "If \$1=1:File From CSVFiles Path"
+  echo "If \$1=2:File From Other Path"
 elif [ -z "$1" ] && [ -z "$2" ]
 then
   clear

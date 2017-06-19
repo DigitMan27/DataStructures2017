@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 #-------------------------------------------AVLTree Implementation in Python-------------------------------------------
 

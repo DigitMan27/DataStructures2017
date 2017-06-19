@@ -7,10 +7,10 @@ import Operations #import the module as it is and with Operations.<name> put par
 def LinearSearch_ID():
         position = 0
         found = False
-        SEARCH_LIST = list(HOTEL_DICT.keys())  #for list be int write list(map(int,d.keys()))
+        SEARCH_LIST = list(HOTEL_DICT.keys())
         for i in range(len(SEARCH_LIST)):
            SEARCH_LIST[i] = int(SEARCH_LIST[i])
-        ID = input("Put id for searching:")
+        ID = input("Put ID for Searching:")
         while position<len(SEARCH_LIST) and not found:
              if SEARCH_LIST[position] == int(ID):
                   found = True
@@ -24,7 +24,7 @@ def LinearSearch_Name():
       LINEAR_SEARCH_NAMES_LIST = list(RESERVATIONS_DICT.keys())
       for i in range(len(LINEAR_SEARCH_NAMES_LIST)):
          LINEAR_SEARCH_NAMES_LIST[i] = str(LINEAR_SEARCH_NAMES_LIST[i])
-      Name = input("Put name for searching:")
+      Name = input("Put name for Searching:")
       while position<len(LINEAR_SEARCH_NAMES_LIST) and not found:
            if LINEAR_SEARCH_NAMES_LIST[position] == str(Name):
               found = True
@@ -39,7 +39,7 @@ def BinarySearch():
     for i in range(len(SEARCH_LIST)):
          SEARCH_LIST[i] = int(SEARCH_LIST[i])
     SEARCH_LIST.sort()
-    ID = input("Put id for searching:")
+    ID = input("Put ID for Searching:")
     bottom = 0
     top = len(SEARCH_LIST) -1
     while not found and bottom <=top:
@@ -60,7 +60,7 @@ def InterpolationSearch():
     for i in range(len(SEARCH_LIST)):
          SEARCH_LIST[i] = int(SEARCH_LIST[i])
     SEARCH_LIST.sort()
-    ID = input("Put id for searching:")
+    ID = input("Put ID for Searching:")
     bottom = 0
     middle = -1
     top = size - 1
@@ -84,7 +84,8 @@ def InterpolationSearch():
 #+++++++++++++++++++++++++++++++Data_Structure_Operation+++++++++++++++++++++++++++++++
 def AVL_Find():
    found = False
-   ID = int(input("Requested ID:"))
+   ID = int(input("Put ID for Searching:"))
    found = Operations.TREE.find(ID)
    if found:
         print(HOTEL_DICT[str(ID)])
+

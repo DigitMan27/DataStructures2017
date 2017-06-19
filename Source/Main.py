@@ -26,20 +26,22 @@ def MENU(CHOOSE):
         elif CHOOSE==4:
             SEARCH_CHOICE = int(input("Choose Search Opt:"))
             if SEARCH_CHOICE == 1:
-              LinearTimeStart = time.time()
               LinearSearch_ID()
-              LineadTimeEnd = time.time()
-              print("LinearSearch Executed in:",LineadTimeEnd-LinearTimeStart,"s")
             elif SEARCH_CHOICE == 2:
               BinarySearch()
             elif SEARCH_CHOICE == 3:
               pos  = InterpolationSearch()
             elif SEARCH_CHOICE == 4:
                   AVL_Find()
+            else:
+               print("Invalid Search Option.Please Try Again.")
         elif CHOOSE==5:
              LinearSearch_Name()
         elif CHOOSE==6:
             Exit()
+        else:
+            print("Invalid Menu Option.Please Try Again.") 
+            
 
 
 if __name__=="__main__":
