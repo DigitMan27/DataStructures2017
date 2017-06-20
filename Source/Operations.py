@@ -27,7 +27,7 @@ HOTEL_COUNTER = 0 #Initializer for Hotel counter
 COLUMN_STEP = 1 #column step for reservations
 DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv") #path for the default csv file
 WIN32_DELIMITER = ","
-LINUX_DELIMITER = ";"
+LINUX_DELIMITER = ","
 FLAG = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
 NEWLINE = '\n'
 
@@ -116,8 +116,8 @@ def LoadResrv(): #This Function Loads the Reservations Data
 def Add(): #Add Hotels and an number of reserversions to the Hotel
     try:
            global DATA_FULL_LIST
-           #DATA_FULL_LIST = list(DATA_FULL_DICT)
-           #del DATA_FULL_LIST[:]
+           DATA_FULL_LIST = list(DATA_FULL_DICT)
+           del DATA_FULL_LIST[:]
            global HOTEL_COUNTER
            global i_d #ID of the Hotel
            global name #Name of the Hotel
@@ -177,6 +177,8 @@ def Save():
         print("Save Successful...")
         del DATA_FULL_LIST[:]
         DATA_FULL_DICT.clear()
+        HOTEL_DICT.clear()
+        RESERVATIONS_DICT.clear()
     except IOError:
          print("Save():<IOError>")
          fileError()

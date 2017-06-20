@@ -1,6 +1,4 @@
 #!/bin/python3
-import time
-import numpy as np
 import random
 
 def LinearSearch(L):
@@ -9,19 +7,13 @@ def LinearSearch(L):
         found = False
         for i in range(len(L)):
            L[i] = int(L[i])
-        #print(L)
         ID = random.randint(min(L),max(L))
-        #print(ID)
-#        start = time.time()
         while position<len(L) and not found:
              count = count +1
              if L[position] == int(ID):
                   found = True
-                  #print(found)
-                  #print(d_H[ID])
              else:
                   position = position +1
- #       end = time.time()-start
         return count
 
 def BinarySearch(L):
@@ -38,8 +30,6 @@ def BinarySearch(L):
        middle = bottom + (top-bottom)//2
        if L[int(middle)] == int(ID):
           found = True
-          return count
-          #count = count + 1
        elif L[int(middle)] < int(ID):
           bottom = middle + 1
        else:
@@ -48,7 +38,6 @@ def BinarySearch(L):
 
 def InterpolationSearch(L):
     found = False
-    #SEARCH_LIST = list(HOTEL_DICT.keys())
     size  = len(L)
     for i in range(len(L)):
          L[i] = int(L[i])
@@ -66,13 +55,11 @@ def InterpolationSearch(L):
        elif L[middle] > int(ID):
             top = middle - 1
        else:
-            #print("Data is in position:%d"%middle)
             x = L[middle]  
-            #print(HOTEL_DICT[str(x)])
             return middle
     if int(ID) == L[bottom]:
-       #print("Data is in position:%d"%bottom)
        return bottom
     else:
       return -1
     return count
+
