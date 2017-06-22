@@ -23,13 +23,14 @@ RESERVATIONS_LIST = [] #list for reservations names->keys
 
 #--------Variables--------
 BLANK = ''
+customer_name = ''
 HOTEL_COUNTER = 0 #Initializer for Hotel counter
 COLUMN_STEP = 1 #column step for reservations
 DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv") #path for the default csv file
 WIN32_DELIMITER = ","
-LINUX_DELIMITER = ","
+LINUX_DELIMITER = ";"
 FLAG = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
-NEWLINE = '\n'
+NEWLINE = "\n"
 
 #---------------------------------------File Selector---------------------------------------
 if len(sys.argv)<2:
@@ -123,24 +124,17 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            global name #Name of the Hotel
            global stars #Stars of the Hotel
            global Nor #The Number of Rooms(Nor) of the Hotel
+           global customer_name
            i_d = input("ID:")
            name = input("Name:")
            stars = input("Stars:")
            Nor = input("Num_oF_Rooms:")
-           customer_name = input("customer_name:")
-           if customer_name is BLANK:
-                   return
-           checkInDate = input("CheckInDate:")
-           DaysToStay = input("DaysToStay:")
            DATA_FULL_LIST.append(i_d)
            DATA_FULL_LIST.append(name)
            DATA_FULL_LIST.append(stars)
            DATA_FULL_LIST.append(Nor)
-           DATA_FULL_LIST.append(customer_name)
-           DATA_FULL_LIST.append(checkInDate)
-           DATA_FULL_LIST.append(DaysToStay)
            HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
-           while customer_name is not BLANK:
+           while customer_name is BLANK:
               customer_name = input("customer_name:")
               if customer_name is BLANK:
                     break
@@ -177,8 +171,6 @@ def Save():
         print("Save Successful...")
         del DATA_FULL_LIST[:]
         DATA_FULL_DICT.clear()
-        HOTEL_DICT.clear()
-        RESERVATIONS_DICT.clear()
     except IOError:
          print("Save():<IOError>")
          fileError()
