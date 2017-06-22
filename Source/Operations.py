@@ -23,7 +23,7 @@ RESERVATIONS_LIST = [] #list for reservations names->keys
 
 #--------Variables--------
 BLANK = ''
-customer_name = ''
+customer_name = '' #Initialize the customer_name
 HOTEL_COUNTER = 0 #Initializer for Hotel counter
 COLUMN_STEP = 1 #column step for reservations
 DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv") #path for the default csv file
