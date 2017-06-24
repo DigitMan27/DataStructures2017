@@ -40,7 +40,9 @@ def MENU(CHOOSE):
         elif CHOOSE==6:
             Exit()
         else:
-            print("Invalid Menu Option.Please Try Again.") 
+            print("Invalid Menu Option.Please Try Again.")
+       #except ValueError:
+        #    print("This is a string.Please try again..")
             
 
 
@@ -51,4 +53,8 @@ if __name__=="__main__":
    TREE = None #__init__ object value
    SEARCH_CHOICE = -1 #init choice
    while True: 
-      MENU(input("Choice:"))
+     try:
+      MENU(input("Choice:")) 
+     except KeyboardInterrupt:
+          print("\nForce Quit..")
+          exit(0)

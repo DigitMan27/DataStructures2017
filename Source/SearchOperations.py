@@ -19,9 +19,13 @@ def LinearSearch_ID():
                   position = position +1
 
 def LinearSearch_Name():
+      #global RESERVATIONS_LIST
+      #global RESERV_LIST1
+      #global RESERV_LIST2
       position = 0
       found = False
       LINEAR_SEARCH_NAMES_LIST = list(RESERVATIONS_DICT.keys())
+      print(LINEAR_SEARCH_NAMES_LIST)
       for i in range(len(LINEAR_SEARCH_NAMES_LIST)):
          LINEAR_SEARCH_NAMES_LIST[i] = str(LINEAR_SEARCH_NAMES_LIST[i])
       Name = input("Put name for Searching:")

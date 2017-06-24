@@ -20,12 +20,13 @@ DATA_FULL_LIST = []
 LINEAR_SEARCH_NAMES_LIST = [] #list for reservations in search operations file
 SEARCH_LIST = [] #This list is using in search operations file
 RESERVATIONS_LIST = [] #list for reservations names->keys
+RESERV_LIST2=[]
+RESERV_LIST1=[]
 
 #--------Variables--------
 BLANK = ''
 customer_name = '' #Initialize the customer_name
 HOTEL_COUNTER = 0 #Initializer for Hotel counter
-COLUMN_STEP = 1 #column step for reservations
 DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv") #path for the default csv file
 WIN32_DELIMITER = ","
 LINUX_DELIMITER = ";"
@@ -33,23 +34,32 @@ FLAG = False #Is a variable for the program to see if the error function was exe
 NEWLINE = "\n"
 
 #---------------------------------------File Selector---------------------------------------
-if len(sys.argv)<2:
-	filename = DEFAULT_FILENAME
-else:
-	filename = sys.argv[1]
+try:
+  if len(sys.argv)<2:
+        filename = DEFAULT_FILENAME
+  else:
+        filename = sys.argv[1]
 
-print(filename)
+  print(filename)
+except OSError:
+    print("Error in sys.argv")
 
 
 #---------------------------------------Data Cleaner---------------------------------------
 def Clear():
-     choice = str(input("Clear?(Y/N):"))
+    try:
+     choice = input("Clear?(Y/N):")
      if choice == 'Y'or choice == 'y':
        f = open(filename,'w+')
        f.close()
        print("Success")
      elif choice == 'N'or choice == 'n':
           print("CSV File clear failed")
+     else:
+          print("Please Try Again.")
+    except IOError:
+          print(filename,"does not exist.")
+          exit(0)
 
 
 #---------------------------------------Error Functions---------------------------------------
@@ -91,8 +101,6 @@ def Load(): #This Function Loads the Hotel Data
 
 
 def LoadResrv(): #This Function Loads the Reservations Data
-    global RESERVATIONS_LIST
-    global COLUMN_STEP
     try:
      if os.stat(filename).st_size != 0:
       with open(filename,'r') as f:
@@ -103,11 +111,10 @@ def LoadResrv(): #This Function Loads the Reservations Data
        next(reader)
        for row in reader:
          RESERVATIONS_LIST = row[4::3]
-         for i in RESERVATIONS_LIST:
-             RESERVATIONS_DICT[i] = row[5::COLUMN_STEP]
-             if RESERVATIONS_DICT[i] == row[4::3]:
-                COLUMN_STEP = COLUMN_STEP + 2
-             COLUMN_STEP = COLUMN_STEP + 1
+         RESERV_LIST1 = row[5::3]
+         RESERV_LIST2 = row[6::3]
+         for data in RESERVATIONS_LIST:
+            RESERVATIONS_DICT[data] = RESERV_LIST1,RESERV_LIST2
       f.close()
     except IOError:
        if FLAG is not True:
@@ -134,7 +141,7 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
            DATA_FULL_LIST.append(stars)
            DATA_FULL_LIST.append(Nor)
            HOTEL_COUNTER = len(DATA_FULL_DICT.keys())
-           while customer_name is BLANK:
+           while True:
               customer_name = input("customer_name:")
               if customer_name is BLANK:
                     break
@@ -176,7 +183,7 @@ def Save():
          fileError()
 
 
-def Save_ON_Exit(): #Save before Exit the Program
+def Save_ON_Exit(): #Save-Refresh the counter on exit of the program
    try:
     with open(filename,'r+',newline='') as f:
                content = f.read()
