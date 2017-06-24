@@ -5,7 +5,6 @@ import csv
 import sys
 import time
 import os
-from sys import platform
 from AVL import *
 
 global filename #Name of the csv file
@@ -28,8 +27,7 @@ BLANK = ''
 customer_name = '' #Initialize the customer_name
 HOTEL_COUNTER = 0 #Initializer for Hotel counter
 DEFAULT_FILENAME = os.path.join("../CSVFiles","data.csv") #path for the default csv file
-WIN32_DELIMITER = ","
-LINUX_DELIMITER = ";"
+DELIMITER = ";"
 FLAG = False #Is a variable for the program to see if the error function was executed as a result not to show the same message two times
 NEWLINE = "\n"
 
@@ -80,10 +78,7 @@ def Load(): #This Function Loads the Hotel Data
        print(">CSV File is empty!")
     else:
      with open(filename,'r') as f:
-       if platform == "linux":
-        reader = csv.reader(f,delimiter = LINUX_DELIMITER)
-       elif platform == "win32":
-        reader = csv.reader(f,delimiter = WIN32_DELIMITER)
+       reader = csv.reader(f,delimiter = DELIMITER)
        next(reader)
        TREE = AVLTree() #Create the AVLTree
        for row in reader:
@@ -104,10 +99,7 @@ def LoadResrv(): #This Function Loads the Reservations Data
     try:
      if os.stat(filename).st_size != 0:
       with open(filename,'r') as f:
-       if platform == "linux": 
-         reader = csv.reader(f,delimiter = LINUX_DELIMITER)
-       elif platform == "win32":
-         reader = csv.reader(f,delimiter = WIN32_DELIMITER)
+       reader = csv.reader(f,delimiter = DELIMITER)
        next(reader)
        for row in reader:
          RESERVATIONS_LIST = row[4::3]
@@ -169,10 +161,7 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
 def Save():
     try:
         with open(filename,'a',newline='') as f:
-               if platform == "linux":
-                 w = csv.writer(f,delimiter=LINUX_DELIMITER,quotechar = '|')
-               elif platform == "win32":
-                 w = csv.writer(f,delimiter=WIN32_DELIMITER,quotechar = '|')
+               w = csv.writer(f,delimiter=DELIMITER,quotechar = '|')
                w.writerow(DATA_FULL_LIST)
         f.close()
         print("Save Successful...")
