@@ -13,10 +13,10 @@ def InterBench():
    times = 0
    f = open("InterpolationSearch_Comp.txt","w")
    f0 = open("InterpolationSearch_Time.txt","w")
-   while(times<1000):
-       start = time.time()
+   while(times<3000):
+       start = time.clock()
        pop = InterpolationSearch(key)
-       end += time.time() - start
+       end += time.clock() - start
        res.append(pop)
        avg = sum(res)/(len(key)-1)
        f.write(str(times)+" "+str(avg)+"\n")

@@ -13,10 +13,10 @@ def BinBench():
    times = 0
    f = open("BinarySearch_Comp.txt","w")
    f0 = open("BinarySearch_Time.txt","w")
-   while(times<1000):
-       start = time.time()
+   while(times<3000):
+       start = time.clock()
        pop = BinarySearch(key)
-       end += time.time() - start
+       end += time.clock() - start
        res.append(pop) 
        avg = sum(res)/(len(key)-1)
        f.write(str(times)+" "+str(avg)+"\n")
