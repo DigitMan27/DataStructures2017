@@ -10,6 +10,7 @@ set output "BenchmarkCharts/Comparisons_Benchmarks/BinarySearch_Comp.png"
 plot "BinarySearch_Comp.txt" with lines
 set output "BenchmarkCharts/Comparisons_Benchmarks/Comparison_Benchmarks.png"
 plot "LinearSearch_Comp.txt" with lines,"InterpolationSearch_Comp.txt" with lines,"BinarySearch_Comp.txt" with lines
+set ylabel "ExecutionTime"
 set output "BenchmarkCharts/Time_Benchmarks/LinearSearch_Time.png"
 plot "LinearSearch_Time.txt" with lines
 set output "BenchmarkCharts/Time_Benchmarks/InterpolationSearch_Time.png"

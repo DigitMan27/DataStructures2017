@@ -13,10 +13,10 @@ def LinBench():
    times = 0
    f = open("LinearSearch_Comp.txt","w")
    f0 = open("LinearSearch_Time.txt","w")
-   while(times<1000):
-       start = time.time()
+   while(times<3000):
+       start = time.clock()
        pop = LinearSearch(key)
-       end += time.time() - start
+       end += time.clock() - start
        res.append(round(pop))
        avg = sum(res)/(len(key)-1)
        f.write(str(times)+" "+str(avg)+"\n")
