@@ -150,7 +150,6 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
                f.write(str(HOTEL_COUNTER)) #save there the number of hotels
                f.write(NEWLINE)
            f.close()
-           print(DATA_FULL_LIST)
     except ValueError:
          print("Add():<ValueError>")
     except IOError:
@@ -160,6 +159,7 @@ def Add(): #Add Hotels and an number of reserversions to the Hotel
 	
 def Save():
     try:
+      if len(DATA_FULL_LIST)!=0:
         with open(filename,'a',newline='') as f:
                w = csv.writer(f,delimiter=DELIMITER,quotechar = '|')
                w.writerow(DATA_FULL_LIST)
